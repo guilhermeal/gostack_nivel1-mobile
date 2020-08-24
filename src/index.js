@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, StatusBar } from 'react-native';
+import api from './services/api';
 
 export default function App() {
+
+  const [projects, setProjects] = useState([]);
+  useEffect(() => {
+    api.get('/projects').then(response => {
+      console.log(response.data);
+      setProjects(response.data);
+    });
+  }, []);
+  
   return (
     <>
     <StatusBar 
@@ -26,7 +36,7 @@ const styles = StyleSheet.create({
   },
   textTitle: {
     color: '#FFFFFF',
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: 'bold',
   }
 })
