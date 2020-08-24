@@ -13,14 +13,18 @@ export default function App() {
   }, []);
 
   async function handleAddProject() {
-    const response = await api.post('projects', {
+    const response = await api.post('/projects', {
       title: `RN Novo projeto ${Date.now()}`,
       owner: 'Diego 3G'
     });
-
     const project = response.data;
-
     setProjects([...projects, project]);
+  }
+
+  async function handleDeleteProject(id) {    
+    // console.log('Delete: ', id);
+    // api.delete(`/projects/${id}`);
+    // setProjects(projects.filter(project => project.id !== id));
   }
   
   return (
@@ -67,8 +71,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  buttonInline: {
+    backgroundColor: 'red',
+    margin: 10,
+    height: 20,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
   buttonText: {
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  buttonTextInline: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 10,
   }
 })
